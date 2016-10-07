@@ -209,7 +209,7 @@ void HieuSolution()	{
           {
             if(OnTrack(RIGHT_EYE,5))
               {
-                //Right on, left off , stop or slow down left motor untill...
+                //Right on, left off, stop or slow down left motor until...
             }
             else
               {
