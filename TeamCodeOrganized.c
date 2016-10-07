@@ -1,5 +1,5 @@
 /*Competition 1 Team 1
-require turtle.c, timer.c, avoid.c*/
+require turtle.c, timer.c, avoid.c.*/
 
 
 //Declartion of Variables
