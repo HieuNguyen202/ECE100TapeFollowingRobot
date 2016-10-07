@@ -19,6 +19,9 @@ int rightJustActivated = 0;
 float turnDelay = 0.13;
 float backDelay = 0.2;
 float randomTime = 0.5;
+/*other variables*/
+int lastSensorOnTrack; //0: left	2: right
+int lastSensorOffTrack; //0: left	2: right
 
 
 
@@ -194,29 +197,39 @@ void HieuSolution()	{
     while(1){
         //motor(RIGHT_MOTOR,normalize(analog(LEFT_EYE),LEFT_MIN_LIGHT,LEFT_MAX_LIGHT));
         //motor(LEFT_MOTOR,normalize(analog(RIGHT_EYE),RIGHT_MIN_LIGHT,RIGHT_MAX_LIGHT));
+	    // need a multitasked program to check which one is last on track which one is off.
         if(OnTrack(LEFT_EYE,5))
           {
             if(OnTrack(RIGHT_EYE,5))
               {
-                //Both are on track, execute path seeking codes.
-            }
+                //It encounter a turn, turn toward the last off track motor.
+		if (lastSensorOffTrack==LEFT_EYE) left(); else right();
+		while(OnTrack(lastSensorOnTrack)==false)
+		{
+		}
+              }
             else
               {
-                //Right off, left on -> stop or slow down right motor until... start timer
-            }
-        }
+                //Right off, left on -> Good keep moving forward
+		forward();
+              }
+          }
         else
           {
             if(OnTrack(RIGHT_EYE,5))
               {
-                //Right on, left off , stop or slow down left motor untill...
-            }
+                //Right on, left off, Good keep moving forward
+		forward();
+              }
             else
               {
-                //Both are off track, keep moving forward.
-                
-            }
-        }
+                //Both are off track, not good, veer back towards the side of the last sensor on track until it's on track again
+                if (lastSensorOnTrack==LEFT_EYE) left(); else right();
+		while(OnTrack(lastSensorOnTrack)==false)
+		{
+		}
+              }
+          }
     }
 }
 /*Nick's Solution Method*/
