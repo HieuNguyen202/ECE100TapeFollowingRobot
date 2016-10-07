@@ -221,8 +221,7 @@ void HieuSolution()	{
 }
 /*Nick's Solution Method*/
 void NickSolution()	{
-	
-	//sensors outside code
+//sensors outside code
 
 
 //guessing around where the sensors will be reading off and on the tape to use in the "while" and "if" conditions.
@@ -251,16 +250,16 @@ void veerLeft(){
 forward();
 sleep(.02);
 
-while(1){
-    //assuming both sensors start on the tape this will have the robot veer to the right until the right sensor is off
-    do{                                 
-        veerRight();
-        sleep(.02);
+
+//assuming both sensors start on the tape this will have the robot veer to the right until the right sensor is off
+do{                                 
+    veerRight();
+    sleep(.02);
         
         
-    }while(RIGHT_EYE < onTape && LEFT_EYE < onTape);
+}while(RIGHT_EYE < onTape && LEFT_EYE < onTape);
     
-    
+while(1){    
     //this just has the robot going back and fourth waiting for one sensor or the other to go off the tape.  
     if(RIGHT_EYE > offTape){
         
@@ -293,9 +292,6 @@ while(1){
         
     }
 }
-	
-}
-
 
 
 /*Competition 0 Code
