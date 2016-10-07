@@ -209,7 +209,7 @@ void HieuSolution()	{
           {
             if(OnTrack(RIGHT_EYE,5))
               {
-                //Right on, left off, stop or slow down left motor until...
+                //Right on, left off , stop or slow down left motor untill...
             }
             else
               {
@@ -221,6 +221,78 @@ void HieuSolution()	{
 }
 /*Nick's Solution Method*/
 void NickSolution()	{
+	
+	//sensors outside code
+
+
+//guessing around where the sensors will be reading off and on the tape to use in the "while" and "if" conditions.
+int onTape=65;
+int offTape=120;
+
+//counter var.  
+
+int counter;
+
+//new functions to get the robot to veer to the right or left instead of actually turning.
+void veerRight(){
+    
+    motor(LEFT_MOTOR, 100);
+    
+       
+}
+
+void veerLeft(){
+    motor(RIGHT_MOTOR, 100);
+}
+
+
+
+//just to get the robot moving
+forward();
+sleep(.02);
+
+while(1){
+    //assuming both sensors start on the tape this will have the robot veer to the right until the right sensor is off
+    do{                                 
+        veerRight();
+        sleep(.02);
+        
+        
+    }while(RIGHT_EYE < onTape && LEFT_EYE < onTape);
+    
+    
+    //this just has the robot going back and fourth waiting for one sensor or the other to go off the tape.  
+    if(RIGHT_EYE > offTape){
+        
+        veerLeft();
+        sleep(.02);
+        counter = 1;
+    }
+    
+    if(LEFT_EYE > offTape){
+        
+        veerRight();
+        sleep(.02);
+        counter = 0;
+        
+    }
+    //incase both sensors are both on the tape at the same time. 
+    else{
+        
+        if(counter = 1){
+            
+            veerLeft();
+            sleep(.02);
+            counter = 1;        
+        }
+        if(counter = 0){
+            veerRight();
+            sleep(.02);
+            counter = 0;
+        }
+        
+    }
+}
 	
 }
 
