@@ -23,8 +23,16 @@ float randomTime = 0.5;
 int lastSensorOnTrack; //0: left	2: right
 int lastSensorOffTrack; //0: left	2: right
 
-
-
+// Determine which sensor is last on track or off track
+void UpdateLastStateOfSensors(){
+	while(true)
+	{
+		if(OnTrack(LEFT_EYE)) lastSensorOnTrack=LEFT_EYE;
+		if(OnTrack(RIGHT_EYE)) lastSensorOnTrack=RIGHT_EYE;
+		if(!OnTrack(LEFT_EYE)) lastSensorOffTrack=LEFT_EYE;
+		if(!OnTrack(RIGHT_EYE)) lastSensorOffTrack=RIGHT_EYE;
+	}
+}
 //Movement Abstractions (Defined out functions here)
 /*timer.c*/
 float _timer;
